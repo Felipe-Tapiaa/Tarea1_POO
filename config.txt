@@ -1,0 +1,9 @@
+publicador Streamer1 Notificaciones
+suscriptor Seguidor Seguidor1 Notificaciones seguidor1.txt
+suscriptor Seguidor Seguidor2 Notificaciones seguidor2.txt
+suscriptor Contador Counter1 Notificaciones
+
+publicador GPS1 Posiciones
+suscriptor Registrador Recorder1 Posiciones recorder1.csv
+suscriptor Monitor Monitor1 Posiciones monitor1.txt
+suscriptor Contador Counter2 Posiciones
