@@ -1,0 +1,82 @@
+@startuml
+
+class Component {
+    -name: String
+    -topicName: String
+    +Component()
+    +Component(name: String, topicName: String)
+    +getName(): String
+    +getTopicName(): String
+}
+
+class Publisher {
+    -topic: Topic
+    +Publisher()
+    +Publisher(name: String, broker: Broker, topicName: String)
+    +publishNewEvent(message: String)
+}
+
+class Subscriber {
+    +Subscriber()
+    +Subscriber(name: String, topicName: String)
+    +update(message: String)
+}
+
+abstract class Subscriber
+
+class Follower {
+    -out: PrintStream
+    +Follower(name: String, topicName: String, out: PrintStream)
+    +update(message: String)
+}
+
+class Recorder {
+    -out: PrintStream
+    +Recorder(name: String, topicName: String, out: PrintStream)
+    +update(message: String)
+}
+
+class Monitor {
+    -out: PrintStream
+    +Monitor(name: String, topicName: String, out: PrintStream)
+    +update(message: String)
+}
+
+class Topic {
+    -topicName: String
+    -subscribers: ArrayList<Subscriber>
+    +Topic()
+    +Topic(topicName: String)
+    +subscribe(sub: Subscriber)
+    +notify(message: String)
+    +hasThisName(name: String): boolean
+}
+
+class Broker {
+    -topics: ArrayList<Topic>
+    +Broker()
+    +createTopic(topicName: String): Topic
+    +subscribe(sub: Subscriber): boolean
+}
+
+class T1Stage4 {
+    -gps: Publisher
+    -broker: Broker
+    -publishers: ArrayList<Publisher>
+    +main(args: String[])
+    +setupSimulator(in: Scanner)
+    +runSimulation()
+    -findPublisher(name: String): Publisher
+}
+
+' Relaciones
+Component <|-- Publisher
+Component <|-- Subscriber
+Subscriber <|-- Follower
+Subscriber <|-- Recorder
+Subscriber <|-- Monitor
+
+Broker "1" o-- "*" Topic
+Topic "1" o-- "*" Subscriber
+
+@enduml
